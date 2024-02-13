@@ -11,13 +11,13 @@ namespace ConsoleApp1
         public static void CreateTable(string table, string column)
         {
             string connetionString = "Host=localhost;Port=5432;Database=connected;username=postgres;Password=psqlDB;";
-            
+
             using (NpgsqlConnection connection = new NpgsqlConnection(connetionString))
             {
                 connection.Open();
 
                 string query = @$"CREATE TABLE {table} (id SERIAl, {column} VARCHAR(255));";
-                using NpgsqlCommand cmd = new NpgsqlCommand(query,connection);
+                using NpgsqlCommand cmd = new NpgsqlCommand(query, connection);
 
                 cmd.ExecuteNonQuery();
 
@@ -56,14 +56,14 @@ namespace ConsoleApp1
         {
             string connectionString = "Host=localhost;Port=5432;Database=connected;username=postgres;Password=psqlDB;";
 
-            using(NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
                 string query = @$"SELECT * FROM {table} WHERE id = {id};";
 
                 using NpgsqlCommand cmd = new NpgsqlCommand(query, connection);
-                
+
                 var result = cmd.ExecuteReader();
 
                 Console.WriteLine();
@@ -81,7 +81,7 @@ namespace ConsoleApp1
         {
             string connectionString = "Host=localhost;Port=5432;Database=connected;username=postgres;Password=psqlDB;";
 
-            using(NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
@@ -105,12 +105,12 @@ namespace ConsoleApp1
         public static void UpdateTable(string oldTableName, string NewTableName)
         {
             string connectionString = "Host=localhost;Port=5432;Database=connected;username=postgres;Password=psqlDB;";
-            using( NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
                 string query = @$"ALTER TABLE {oldTableName} RENAME TO {NewTableName};";
-                using NpgsqlCommand cmd = new NpgsqlCommand(query,connection);
+                using NpgsqlCommand cmd = new NpgsqlCommand(query, connection);
 
                 cmd.ExecuteNonQuery();
 
@@ -123,14 +123,14 @@ namespace ConsoleApp1
         {
             string connectionString = "Host=localhost;Port=5432;Database=connected;username=postgres;Password=psqlDB;";
 
-            using(NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
                 string query = @$"UPDATE {table} SET {columnName} = '{value}';";
-                using(NpgsqlCommand cmd =  new NpgsqlCommand(query,connection))
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
 
                 Console.WriteLine("Succesfully updated !");
 
@@ -141,7 +141,7 @@ namespace ConsoleApp1
         {
             string connectionString = "Host=localhost;Port=5432;Database=connected;username=postgres;Password=psqlDB;";
 
-            using(NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
@@ -157,12 +157,12 @@ namespace ConsoleApp1
         public static void UpdateColumn(string table, string oldname, string newname)
         {
             string connectionString = "Host=localhost;Port=5432;Database=connected;username=postgres;Password=psqlDB;";
-            using(NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
                 string query = @$"ALTER TABLE {table} RENAME COLUMN {oldname} TO {newname};";
-                using NpgsqlCommand cmd = new NpgsqlCommand(query,connection);
+                using NpgsqlCommand cmd = new NpgsqlCommand(query, connection);
 
                 cmd.ExecuteNonQuery();
 
@@ -175,15 +175,15 @@ namespace ConsoleApp1
         {
             string connectionString = "Host=localhost;Port=5432;Database=connected;username=postgres;Password=psqlDB;";
 
-            using(NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
                 string query = @$"DELETE FROM {table} WHERE {columnName} = '{value}';";
 
-                using(NpgsqlCommand cmd = new NpgsqlCommand(query,connection))
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
 
                 Console.WriteLine("Succesfully deleted !");
 
@@ -194,17 +194,17 @@ namespace ConsoleApp1
         {
             string connectionString = "Host=localhost;Port=5432;Database=connected;username=postgres;Password=psqlDB;";
 
-            using(NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
                 string query = $@"TRUNCATE TABLE {table};";
                 using (NpgsqlCommand cmd = new NpgsqlCommand(query, connection))
 
-                cmd.ExecuteNonQuery();
-                
+                    cmd.ExecuteNonQuery();
+
                 Console.WriteLine("Operation is succesfully ended !");
-                
+
                 connection.Close();
             }
         }
@@ -214,17 +214,17 @@ namespace ConsoleApp1
         {
             string connectionString = "Host=localhost;Port=5432;Database=connected;username=postgres;Password=psqlDB;";
 
-            using(NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
                 string query = @$"INSERT INTO {table}({columnName}) VALUES('{value}');";
                 using NpgsqlCommand cmd = new NpgsqlCommand(query, connection);
-                
+
                 cmd.ExecuteNonQuery();
 
                 Console.WriteLine("Succesfully Added!");
-                
+
                 connection.Close();
             }
         }
@@ -233,7 +233,7 @@ namespace ConsoleApp1
         public static void AddColumn(string table, string column, string type)
         {
             string connectionString = "Host=localhost;Port=5432;Database=connected;username=postgres;Password=psqlDB;";
-            using(NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
@@ -267,7 +267,7 @@ namespace ConsoleApp1
         public static void Join(string table, string table2, string join1, string join2)
         {
             string connectionString = "Host=localhost;Port=5432;Database=connected;username=postgres;Password=psqlDB;";
-            using(NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
@@ -306,8 +306,7 @@ namespace ConsoleApp1
         }
         public static void InsertMany()
         {
-
+            string connectionString = "Host=localhost;Port=5432;Database=connected;username=postgres;Password=psqlDB;";
         }
-
     }
 }
